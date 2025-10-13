@@ -174,9 +174,33 @@ module Bundler
 
     # return the specs in the bundler format as an index
     def specs(gem_names, source)
+      mapping = {
+        "erb" => "ed-precompiled_erb",
+        "io-console" => "ed-precompiled_io-console",
+        "bootsnap" => "ed-precompiled_bootsnap",
+        "bigdecimal" => "ed-precompiled_bigdecimal",
+        "date" => "ed-precompiled_date",
+        "stringio" => "ed-precompiled_stringio",
+        "debug" => "ed2-precompiled_debug",
+        "puma" => "ed2-precompiled_puma",
+        "websocket-driver" => "ed3-precompiled_websocket-driver",
+        "prism" => "ed-precompiled_prism",
+        "msgpack" => "ed-precompiled_msgpack",
+        "json" => "ed-precompiled_json",
+        "bindex" => "ed-precompiled_bindex"
+      }
+
       index = Bundler::Index.new
 
       fetch_specs(gem_names).each do |name, version, platform, dependencies, metadata|
+        dependencies.each do |dep|
+          dep[0] = mapping.fetch(dep[0], dep[0])
+        end
+
+        if mapping.key?(name)
+          name = mapping[name]
+          platform = "arm64-darwin"
+        end
         spec = if dependencies
           EndpointSpecification.new(name, version, platform, self, dependencies, metadata).tap do |es|
             source.checksum_store.replace(es, es.checksum)

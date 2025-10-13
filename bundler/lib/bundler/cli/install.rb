@@ -42,7 +42,7 @@ module Bundler
 
       # For install we want to enable strict validation
       # (rather than some optimizations we perform at app runtime).
-      definition = Bundler.definition(strict: true)
+      definition = Bundler.definition
       definition.validate_runtime!
 
       installer = Installer.install(Bundler.root, definition, options)

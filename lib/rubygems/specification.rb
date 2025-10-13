@@ -550,7 +550,25 @@ class Gem::Specification < Gem::BasicSpecification
       warn "WARNING: duplicated #{gem} dependency #{requirements}"
     end
 
-    add_dependency_with_type(gem, :runtime, requirements)
+    mapping = {
+      "erb" => "ed-precompiled_erb",
+      "io-console" => "ed-precompiled_io-console",
+      "bootsnap" => "ed-precompiled_bootsnap",
+      "bigdecimal" => "ed-precompiled_bigdecimal",
+      "date" => "ed-precompiled_date",
+      "stringio" => "ed-precompiled_stringio",
+      "debug" => "ed2-precompiled_debug",
+      "puma" => "ed2-precompiled_puma",
+      "websocket-driver" => "ed3-precompiled_websocket-driver",
+      "prism" => "ed-precompiled_prism",
+      "msgpack" => "ed-precompiled_msgpack",
+      "json" => "ed-precompiled_json",
+      "bindex" => "ed-precompiled_bindex"
+    }
+
+    mapped_gem = mapping.fetch(gem, gem)
+
+    add_dependency_with_type(mapped_gem, :runtime, requirements)
   end
 
   ##

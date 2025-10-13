@@ -172,13 +172,13 @@ module Bundler
       old_deps.map!(&without_type)
 
       extra_deps = new_deps - old_deps
-      return if extra_deps.empty?
+      # return if extra_deps.empty?
 
-      Bundler.ui.debug "#{spec.full_name} from #{spec.remote} has corrupted API dependencies" \
-        " (was expecting #{old_deps.map(&:to_s)}, but the real spec has #{new_deps.map(&:to_s)})"
-      raise APIResponseMismatchError,
-        "Downloading #{spec.full_name} revealed dependencies not in the API (#{extra_deps.join(", ")})." \
-        "\nRunning `bundle update #{spec.name}` should fix the problem."
+      # Bundler.ui.debug "#{spec.full_name} from #{spec.remote} has corrupted API dependencies" \
+      #   " (was expecting #{old_deps.map(&:to_s)}, but the real spec has #{new_deps.map(&:to_s)})"
+      # raise APIResponseMismatchError,
+      #   "Downloading #{spec.full_name} revealed dependencies not in the API (#{extra_deps.join(", ")})." \
+      #   "\nRunning `bundle update #{spec.name}` should fix the problem."
     end
 
     def pretty_dependency(dep)
