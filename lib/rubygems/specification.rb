@@ -556,14 +556,18 @@ class Gem::Specification < Gem::BasicSpecification
       "bootsnap" => "ed-precompiled_bootsnap",
       "bigdecimal" => "ed-precompiled_bigdecimal",
       "date" => "ed-precompiled_date",
-      # "stringio" => "ed-precompiled_stringio",
+      "stringio" => "ed-precompiled_stringio",
       "debug" => "ed2-precompiled_debug",
       "puma" => "ed2-precompiled_puma",
       "websocket-driver" => "ed3-precompiled_websocket-driver",
       "prism" => "ed-precompiled_prism",
       "msgpack" => "ed-precompiled_msgpack",
       "json" => "ed-precompiled_json",
-      "bindex" => "ed-precompiled_bindex"
+      "bindex" => "ed-precompiled_bindex",
+      "ed25519" => "ed-precompiled_ed25519",
+      "nio4r" => "ed-precompiled_nio4r",
+      "racc" => "ed-precompiled_racc",
+      "bcrypt_pbkdf" => "ed-precompiled_bcrypt_pbkdf",
     }
 
     mapped_gem = mapping.fetch(gem, gem)

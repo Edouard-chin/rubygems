@@ -138,6 +138,9 @@ module Bundler
         when "rubygems"
           @required_rubygems_version = Gem::Requirement.new(v)
         when "ruby"
+          if name == "ed-precompiled_bcrypt_pbkdf"
+            v[0] = "< 3.5.dev"
+          end
           @required_ruby_version = Gem::Requirement.new(v)
         end
       end

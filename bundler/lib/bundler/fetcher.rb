@@ -188,6 +188,10 @@ module Bundler
         "msgpack" => { name: "ed-precompiled_msgpack", version: "1.8.0" },
         "json" => { name: "ed-precompiled_json", version: "2.15.1" },
         "bindex" => { name: "ed-precompiled_bindex", version: "0.8.1" },
+        "ed25519" => { name: "ed-precompiled_ed25519", version: "1.4.0" },
+        "nio4r" => { name: "ed-precompiled_nio4r", version: "2.7.4" },
+        "racc" => { name: "ed-precompiled_racc", version: "1.8.1" },
+        "bcrypt_pbkdf" => { name: "ed-precompiled_bcrypt_pbkdf", version: "1.1.1" }
       }
 
       index = Bundler::Index.new
