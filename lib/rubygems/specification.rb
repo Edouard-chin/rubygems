@@ -556,7 +556,7 @@ class Gem::Specification < Gem::BasicSpecification
       "bootsnap" => "ed-precompiled_bootsnap",
       "bigdecimal" => "ed-precompiled_bigdecimal",
       "date" => "ed-precompiled_date",
-      "stringio" => "ed-precompiled_stringio",
+      # "stringio" => "ed-precompiled_stringio",
       "debug" => "ed2-precompiled_debug",
       "puma" => "ed2-precompiled_puma",
       "websocket-driver" => "ed3-precompiled_websocket-driver",
@@ -568,7 +568,7 @@ class Gem::Specification < Gem::BasicSpecification
 
     mapped_gem = mapping.fetch(gem, gem)
 
-    add_dependency_with_type(mapped_gem, :runtime, requirements)
+    add_dependency_with_type(gem, :runtime, requirements)
   end
 
   ##

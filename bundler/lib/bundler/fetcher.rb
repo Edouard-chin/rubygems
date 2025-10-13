@@ -175,30 +175,36 @@ module Bundler
     # return the specs in the bundler format as an index
     def specs(gem_names, source)
       mapping = {
-        "erb" => "ed-precompiled_erb",
-        "io-console" => "ed-precompiled_io-console",
-        "bootsnap" => "ed-precompiled_bootsnap",
-        "bigdecimal" => "ed-precompiled_bigdecimal",
-        "date" => "ed-precompiled_date",
-        "stringio" => "ed-precompiled_stringio",
-        "debug" => "ed2-precompiled_debug",
-        "puma" => "ed2-precompiled_puma",
-        "websocket-driver" => "ed3-precompiled_websocket-driver",
-        "prism" => "ed-precompiled_prism",
-        "msgpack" => "ed-precompiled_msgpack",
-        "json" => "ed-precompiled_json",
-        "bindex" => "ed-precompiled_bindex"
+        "erb" => { name: "ed-precompiled_erb", version: "5.0.3" },
+        "io-console" => { name: "ed-precompiled_io-console", version: "0.8.1" },
+        "bootsnap" => { name: "ed-precompiled_bootsnap", version: "1.18.6" },
+        "bigdecimal" => { name: "ed-precompiled_bigdecimal", version: "3.3.1" },
+        "date" => { name: "ed-precompiled_date", version: "3.4.1" },
+        "stringio" => { name: "ed-precompiled_stringio", version: "3.1.8" },
+        "debug" => { name: "ed2-precompiled_debug", version: "1.11.0" },
+        "puma" => { name: "ed2-precompiled_puma", version: "7.0.4" },
+        "websocket-driver" => { name: "ed3-precompiled_websocket-driver", version: "0.8.0" },
+        "prism" => { name: "ed-precompiled_prism", version: "1.5.2" },
+        "msgpack" => { name: "ed-precompiled_msgpack", version: "1.8.0" },
+        "json" => { name: "ed-precompiled_json", version: "2.15.1" },
+        "bindex" => { name: "ed-precompiled_bindex", version: "0.8.1" },
       }
 
       index = Bundler::Index.new
 
       fetch_specs(gem_names).each do |name, version, platform, dependencies, metadata|
         dependencies.each do |dep|
-          dep[0] = mapping.fetch(dep[0], dep[0])
+          dep_name = dep[0]
+
+          mapped_dep = mapping[dep_name]
+          next unless mapped_dep
+
+          dep[0] = mapped_dep[:name]
+          dep[1] = mapped_dep[:version]
         end
 
         if mapping.key?(name)
-          name = mapping[name]
+          name = mapping[name][:name]
           platform = "arm64-darwin"
         end
         spec = if dependencies
